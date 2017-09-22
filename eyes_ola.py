@@ -36,15 +36,15 @@ BLINK_PIN       = 23    # GPIO pin for blink button (BOTH eyes)
 WINK_R_PIN      = 24    # GPIO pin for RIGHT eye wink button
 AUTOBLINK       = False  # If True, eyes blink autonomously
 
-# EYE_SVG			= "graphics/eye.svg"
-# IRIS			= "graphics/iris.jpg"
-# SCLERA			= "graphics/sclera.png"
-# LID				= "graphics/lid.png"
-
-EYE_SVG			= "graphics/dragon-eye.svg"
-IRIS			= "graphics/dragon-iris.jpg"
-SCLERA			= "graphics/dragon-sclera.png"
+EYE_SVG			= "graphics/eye.svg"
+IRIS			= "graphics/iris.jpg"
+SCLERA			= "graphics/sclera.png"
 LID				= "graphics/lid.png"
+
+#EYE_SVG			= "graphics/dragon-eye.svg"
+#IRIS			= "graphics/dragon-iris.jpg"
+#SCLERA			= "graphics/dragon-sclera.png"
+#LID				= "graphics/lid.png"
 
 
 
@@ -71,9 +71,10 @@ adcValue = [0] * 4
 # the impact of this thread.  data_rate of 250 w/4 ADC channels provides
 # at most 75 Hz update from the ADC, which is plenty for this task.
 def NewData(data):
-  	adcValue[0]= data[0] / 255.0
-  	adcValue[1]= data[1] / 255.0
-  	adcValue[2]= data[2] / 255.0
+	if len(data) > 3:
+  		adcValue[0]= data[0] / 255.0
+  		adcValue[1]= data[1] / 255.0
+  		adcValue[2]= data[2] / 255.0
 
 def olaThread(adc, dest):
   try:
